@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="col-md-6 offset-md-3">
+
+
+    <h1>General Sales Graph</h1>
+    <img src="data:image/png;base64,{{ data }}" />
+
+    <h2>Select a Company to View Specific Sales</h2>
+    <ul>
+        {% for company in companies %}
+            <li><a href="{% url 'specific_sales_graph' company.id %}">{{ company.name }}</a></li>
+        {% endfor %}
+    </ul>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Edit Commande</h1>
+  <form method="post">
+    {% csrf_token %}
+    {{ formset.management_form }}
+    <div id="formset-container">
+      {% for form in formset %}
+        <div class="form-row" style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px;">
+          <div style="flex: 1;">
+            {{ form.code_prod.label_tag }} {{ form.code_prod }}
+          </div>
+          <div style="flex: 1;">
+            {{ form.Qte.label_tag }} {{ form.Qte }}
+          </div>
+          <div style="flex: 1;">
+            {{ form.prix.label_tag }} {{ form.prix }}
+          </div>
+          {% if form.instance.pk %}
+            <div style="flex: 1;">
+              <label for="{{ form.prefix }}-DELETE">Delete:</label> {{ form.DELETE }}
+            </div>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+    <button type="button" hx-get="{% url 'add_formset_row' commande.num_cmd %}" hx-target="#formset-container" hx-swap="beforeend">Add Line</button>
+    <button type="submit">Save</button>
+  </form>
+{% endblock %}

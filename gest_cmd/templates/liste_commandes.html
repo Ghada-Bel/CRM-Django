@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Liste des Commandes</h1>
+  <a href="{% url 'add_commande' %}">Add Commande</a>
+  <table>
+    <thead>
+      <tr>
+        <th>Numéro de Commande</th>
+        <th>Date de Commande</th>
+        <th>Design Commande</th>
+        <th>Client</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for commande in commandes %}
+        <tr>
+          <td>{{ commande.num_cmd }}</td>
+          <td>{{ commande.date_cmd }}</td>
+          <td>{{ commande.design_cmd }}</td>
+          <td>{{ commande.code_client.nom }}</td>
+          <td>
+            <a href="{% url 'edit_commande' commande.num_cmd %}">Edit</a>
+            <a href="{% url 'delete_commande' commande.num_cmd %}">Delete</a>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
